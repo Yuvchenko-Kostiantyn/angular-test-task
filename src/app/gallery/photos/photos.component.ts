@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./photos.component.scss']
 })
 export class PhotosComponent implements OnInit {
+  public loading = false;
+
 
   constructor() { }
 

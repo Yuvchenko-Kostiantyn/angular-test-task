@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PhotosComponent } from './photos/photos.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { SharedModule } from "../shared/shared.module";
 
 
 
@@ -11,7 +12,8 @@ import { FavoritesComponent } from './favorites/favorites.component';
     FavoritesComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule,
   ]
 })
 export class GalleryModule { }

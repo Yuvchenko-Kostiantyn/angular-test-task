@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { LayoutModule } from "./layout/layout.module";
+import { GalleryModule } from "./gallery/gallery.module";
 
 @NgModule({
   declarations: [
@@ -13,8 +15,9 @@ import { LayoutModule } from "./layout/layout.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NoopAnimationsModule,
+    BrowserAnimationsModule,
     LayoutModule,
+    GalleryModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
