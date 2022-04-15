@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -12,6 +13,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MatButtonModule,
     MatToolbarModule,
   ],

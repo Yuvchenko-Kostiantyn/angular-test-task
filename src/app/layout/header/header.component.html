@@ -1,8 +1,20 @@
 <div class="container">
-  <mat-toolbar>
+  <mat-toolbar class="mat-primary">
     <mat-toolbar-row>
-      <button mat-button>Photos</button>
-      <button mat-button>Favorites</button>
+      <button
+        mat-button
+        [routerLink]="['/']"
+        [routerLinkActive]="'mat-accent'"
+        [routerLinkActiveOptions]="{ exact: true }">
+          Photos
+      </button>
+
+      <button
+        mat-button
+        [routerLink]="['/favorites']"
+        [routerLinkActive]="'mat-accent'">
+          Favorites
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
