@@ -43,7 +43,7 @@ describe('GalleryService', () => {
       mockStorageService.getItem.withArgs(Keys.FAVORITES).and.returnValue(null);
 
       service.initFavorites();
-      expect(subjectSpy).not.toHaveBeenCalled();
+      expect(subjectSpy).toHaveBeenCalledWith([]);
     });
   });
 

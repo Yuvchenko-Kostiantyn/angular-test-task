@@ -12,8 +12,8 @@ export class GalleryService {
   constructor(private localStorageService: LocalStorageService) { }
 
   public initFavorites(): void {
-    const favorites = this.localStorageService.getItem(Keys.FAVORITES);
-    favorites && this.favoriteImages.next(JSON.parse(favorites));
+    const favorites = this.localStorageService.getItem(Keys.FAVORITES) || '[]';
+    this.favoriteImages.next(JSON.parse(favorites));
   }
 
   public addFavorite(id: number, currentFavorites: number[]): void {

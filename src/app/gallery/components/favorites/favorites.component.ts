@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GalleryService } from "../../services/gallery.service";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
   selector: 'app-favorites',
@@ -6,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit {
-  public indexList: number[] = [];
+  public indexList: BehaviorSubject<number[]>;
 
-  constructor() { }
+  constructor(private galleryService: GalleryService) {
+    this.indexList = galleryService.favoriteImages;
+  }
 
   ngOnInit(): void {
+    this.galleryService.initFavorites();
   }
 
 }

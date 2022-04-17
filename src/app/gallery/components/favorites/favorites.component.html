@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-card *ngFor="let index of indexList" class="mat-elevation-z0">
+  <mat-card *ngFor="let index of indexList | async" class="mat-elevation-z0">
     <img
       mat-card-image
       src="./assets/{{index}}.jpg"
