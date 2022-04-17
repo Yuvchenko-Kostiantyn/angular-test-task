@@ -2,12 +2,16 @@
   <mat-card class="mat-elevation-z0">
     <img
       mat-card-image
-      src="./assets/1.jpg"
+      src="./assets/{{index}}.jpg"
       alt="Image number 1"
     >
 
     <mat-card-actions>
-      <button mat-raised-button color="primary">Remove from favorites</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onRemoveFromFavorites()"
+      >Remove from favorites</button>
     </mat-card-actions>
   </mat-card>`
 </div>

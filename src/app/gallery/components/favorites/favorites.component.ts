@@ -11,7 +11,6 @@ export class FavoritesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.indexList = [...Array(9).keys()]
   }
 
 }

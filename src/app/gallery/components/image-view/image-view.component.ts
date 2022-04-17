@@ -1,16 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {GalleryService} from "../../services/gallery.service";
 
 @Component({
   selector: 'app-image-view',
   templateUrl: './image-view.component.html',
-  styleUrls: ['./image-view.component.scss']
+  styleUrls: ['./image-view.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ImageViewComponent implements OnInit {
+export class ImageViewComponent {
+  public index: string;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private galleryService: GalleryService,
+  ) {
+    this.index = route.snapshot.params['id'];
+  }
 
-  ngOnInit(): void {
-    console.log('init')
+  public onRemoveFromFavorites() {
+    this.galleryService.removeFavorite(parseInt(this.index));
   }
 
 }
