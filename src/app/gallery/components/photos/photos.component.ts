@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GalleryService} from "../../services/gallery.service";
 
 @Component({
   selector: 'app-photos',
@@ -7,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhotosComponent implements OnInit {
   public loading = false;
+  public indexList: number[] = [];
 
 
-  constructor() { }
+  constructor(private galleryService: GalleryService) { }
 
   ngOnInit(): void {
+    this.indexList = [...Array(10).keys()]
   }
 
+  onImageClick(id: number) {
+    this.galleryService.addFavorite(id);
+  }
 }

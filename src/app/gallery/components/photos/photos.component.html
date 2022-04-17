@@ -1,1 +1,10 @@
+<div class="container">
+  <mat-card *ngFor="let index of indexList" class="mat-elevation-z0">
+    <img
+      src="./assets/{{index}}.jpg"
+      alt="Image number {{index}}"
+      (click)="onImageClick(index)"
+    >
+  </mat-card>`
+</div>
 <app-spinner *ngIf="loading"></app-spinner>

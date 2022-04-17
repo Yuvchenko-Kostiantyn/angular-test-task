@@ -23,6 +23,7 @@ describe('GalleryService', () => {
       ]});
     service = TestBed.inject(GalleryService);
     subjectSpy = spyOn(service.favoriteImages, 'next');
+    mockStorageService.getItem.withArgs(Keys.FAVORITES).and.returnValue(JSON.stringify([...arrayOfFavorites]));
   });
 
   it('should be created', () => {
@@ -31,12 +32,8 @@ describe('GalleryService', () => {
 
   describe('When initializing favorites', () => {
     it('should get favorites from storage and pass emit subject', () => {
-      const rawValue = `{"testKey": "testValue"}`;
-      const parsedValue = { testKey : 'testValue'};
-      mockStorageService.getItem.withArgs(Keys.FAVORITES).and.returnValue(rawValue);
-
       service.initFavorites();
-      expect(subjectSpy).toHaveBeenCalledWith(parsedValue);
+      expect(subjectSpy).toHaveBeenCalledWith([...arrayOfFavorites]);
     });
 
     it('should not emit if there are no values with that key', () => {
@@ -52,14 +49,14 @@ describe('GalleryService', () => {
       const newIndex = 6;
       const newArrayOfFavorites = [...arrayOfFavorites, newIndex];
 
-      service.addFavorite(newIndex, arrayOfFavorites);
+      service.addFavorite(newIndex);
 
       expect(mockStorageService.setItem).toHaveBeenCalledWith(Keys.FAVORITES, JSON.stringify(newArrayOfFavorites));
       expect(subjectSpy).toHaveBeenCalledWith(newArrayOfFavorites);
     });
 
     it('should not add a new favorite item if index already exists', () => {
-      service.addFavorite(5, [...arrayOfFavorites]);
+      service.addFavorite(5);
 
       expect(mockStorageService.setItem).not.toHaveBeenCalled();
       expect(subjectSpy).not.toHaveBeenCalled();
@@ -68,9 +65,6 @@ describe('GalleryService', () => {
 
   it('should remove item from favorites', () => {
     const filteredFavorites = [ 1, 2, 3, 4 ];
-
-    mockStorageService.getItem.withArgs(Keys.FAVORITES).and.returnValue(JSON.stringify([...arrayOfFavorites]));
-
     service.removeFavorite(5);
     expect(mockStorageService.setItem).toHaveBeenCalledWith(Keys.FAVORITES, JSON.stringify(filteredFavorites));
     expect(subjectSpy).toHaveBeenCalledWith(filteredFavorites);

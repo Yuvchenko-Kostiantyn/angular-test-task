@@ -16,8 +16,9 @@ export class GalleryService {
     this.favoriteImages.next(JSON.parse(favorites));
   }
 
-  public addFavorite(id: number, currentFavorites: number[]): void {
-    const isAlreadyFavorite = currentFavorites.find(imageId => imageId === id);
+  public addFavorite(id: number): void {
+    const currentFavorites = JSON.parse(this.localStorageService.getItem(Keys.FAVORITES) || '[]');
+    const isAlreadyFavorite = currentFavorites?.find((imageId: number) => imageId === id);
     if(!isAlreadyFavorite) {
       this.localStorageService.setItem(Keys.FAVORITES, JSON.stringify([...currentFavorites, id]));
       this.favoriteImages.next([...currentFavorites, id]);
