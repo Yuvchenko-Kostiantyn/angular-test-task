@@ -38,6 +38,10 @@ export class PhotosComponent implements OnInit, AfterViewInit, OnDestroy {
     this.takeUntil$.complete();
   }
 
+  public trackByImageNumber(_: number, imageNumber: number) {
+    return imageNumber;
+  }
+
   public onImageClick(id: number): void {
     this.galleryService.addFavorite(id);
   }
@@ -63,7 +67,7 @@ export class PhotosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private initObserver(): void {
     const options = {
-      threshold: 0.95
+      threshold: 0.1
     }
     this.observer = new IntersectionObserver(this.observerCallback.bind(this), options);
   }

@@ -56,4 +56,8 @@ describe('PhotosComponent', () => {
 
     expect(observable.subscribe).toHaveBeenCalled();
   });
+
+  it('should return image index', () => {
+      expect(component.trackByImageNumber(10,12)).toEqual(12);
+  });
 });
