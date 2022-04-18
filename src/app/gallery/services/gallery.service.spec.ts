@@ -3,23 +3,30 @@ import { TestBed } from '@angular/core/testing';
 import { GalleryService } from './gallery.service';
 import { LocalStorageService } from "../../shared/services/local-storage.service";
 import { Keys } from "../../shared/enums/keys.enum";
+import { GalleryApiService } from "./gallery-api.service";
+import { cold } from "jasmine-marbles";
 
 import Spy = jasmine.Spy;
 import Func = jasmine.Func;
 import createSpyObj = jasmine.createSpyObj;
 import SpyObj = jasmine.SpyObj;
 
+
 describe('GalleryService', () => {
   let service: GalleryService;
   let subjectSpy: Spy<Func>;
   let mockStorageService: SpyObj<LocalStorageService>;
+  let mockGalleryApiService: SpyObj<GalleryApiService>;
   const arrayOfFavorites = [1, 2, 3, 4, 5];
 
   beforeEach(() => {
     mockStorageService = createSpyObj('LocalStorageService', ['getItem', 'setItem']);
+    mockGalleryApiService = createSpyObj('GalleryApiService', ['getIndexes']);
+
     TestBed.configureTestingModule({
       providers: [
         { provide: LocalStorageService, useValue: mockStorageService },
+        { provide: GalleryApiService, useValue: mockGalleryApiService },
       ]});
     service = TestBed.inject(GalleryService);
     subjectSpy = spyOn(service.favoriteImages, 'next');
@@ -68,5 +75,12 @@ describe('GalleryService', () => {
     service.removeFavorite(5);
     expect(mockStorageService.setItem).toHaveBeenCalledWith(Keys.FAVORITES, JSON.stringify(filteredFavorites));
     expect(subjectSpy).toHaveBeenCalledWith(filteredFavorites);
+  });
+
+  it('should return a list of image indexes', () => {
+    const expected = cold('a', { a: [1, 2] })
+    mockGalleryApiService.getIndexes.withArgs(10).and.returnValue(expected);
+
+    expect(service.getPage(10)).toEqual(expected);
   });
 });
