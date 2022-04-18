@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
@@ -14,11 +14,13 @@ describe('ImageViewComponent', () => {
   let component: ImageViewComponent;
   let fixture: ComponentFixture<ImageViewComponent>;
   let mockGalleryService: SpyObj<GalleryService>;
+  let mockRouter: SpyObj<Router>;
 
   const imageId = 10;
 
   beforeEach(async () => {
     mockGalleryService = createSpyObj('GalleryService', ['removeFavorite']);
+    mockRouter = createSpyObj('Router', ['navigate']);
     await TestBed.configureTestingModule({
       declarations: [ ImageViewComponent ],
       imports: [
@@ -34,6 +36,7 @@ describe('ImageViewComponent', () => {
         }
         }},
         { provide: GalleryService, useValue: mockGalleryService },
+        { provide: Router, useValue: mockRouter },
       ]
     })
     .compileComponents();
@@ -49,8 +52,9 @@ describe('ImageViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call a method that deletes items item', () => {
+  it('should call a method that deletes items item and navigate to favorites list', () => {
     component.onRemoveFromFavorites();
     expect(mockGalleryService.removeFavorite).toHaveBeenCalledWith(10);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['/favorites']);
   });
 });

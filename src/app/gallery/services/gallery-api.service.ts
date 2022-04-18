@@ -25,7 +25,6 @@ export class GalleryApiService {
       array.push(i);
     }
     this.total += this.step;
-    console.log(array)
     return array;
   }
 }

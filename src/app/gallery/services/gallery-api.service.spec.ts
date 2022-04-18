@@ -19,7 +19,7 @@ describe('GalleryApiService', () => {
     const expected1 = cold('(a|)', { a: [1, 2, 3, 4, 5, 6, 7, 8, 9] });
     expect(service.getIndexes(1)).toBeObservable(expected1);
 
-    const expected2 = cold('(a|)', { a: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19] });
+    const expected2 = cold('(a|)', { a: [10, 11, 12, 13, 14, 15, 16, 17, 18] });
     expect(service.getIndexes(2)).toBeObservable(expected2);
   });
 
